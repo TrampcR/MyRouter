@@ -1,2 +1,11 @@
 include ':app'
+include ':router-annotations'
+include ':router-processor'
+include ':biz-reading'
+
 rootProject.name = "MyRouter"
+
+gradle.taskGraph.beforeTask { task ->
+    println("[all tasks] >>> ${task.name}")
+}
+
