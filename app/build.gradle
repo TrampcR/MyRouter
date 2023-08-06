@@ -49,4 +49,5 @@ dependencies {
     implementation project(':router-annotations')
     kapt project(":router-processor")
     implementation project(':biz-reading')
+    implementation project(':router-runtime')
 }
