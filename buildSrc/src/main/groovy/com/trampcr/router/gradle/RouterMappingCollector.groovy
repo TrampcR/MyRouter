@@ -38,6 +38,7 @@ class RouterMappingCollector {
         } else {
             println("Collector >>> collect class is Director path = ${classFile.absolutePath}")
             classFile.listFiles().each {
+                println("Collector >>> collect class is child file path = ${it.absolutePath}")
                 collect(it)
             }
         }
@@ -56,7 +57,6 @@ class RouterMappingCollector {
         while (enumeration.hasMoreElements()) {
             JarEntry jarEntry = (JarEntry) enumeration.nextElement()
             String entryName = jarEntry.name
-//            println("Collector >>> collectFromJarFile class is $entryName")
             if (entryName.contains(PACKAGE_NAME) && entryName.startsWith(CLASS_NAME_PREFIX)
                     && entryName.endsWith(CLASS_FILE_SUFFIX)) {
                 String className = entryName.replace(PACKAGE_NAME, "")

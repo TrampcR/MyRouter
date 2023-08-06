@@ -3,12 +3,12 @@ package com.trampcr.router.gradle
 import com.android.build.api.transform.Transform
 import com.android.build.gradle.AppExtension
 import com.android.build.gradle.AppPlugin
-import com.android.build.gradle.LibraryExtension
 import groovy.json.JsonSlurper
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class RouterPlugin implements Plugin<Project> {
+    private RouterMappingTransform transform = new RouterMappingTransform()
 
     @Override
     void apply(Project project) {
@@ -17,16 +17,10 @@ class RouterPlugin implements Plugin<Project> {
 
         // 注册 Transform
         if (project.plugins.hasPlugin(AppPlugin)) {
-            AppExtension appExtension = project.extensions.getByType(AppExtension)
+            AppExtension appExtension = project.extensions.getByType(AppExtension.class)
             Transform transform = new RouterMappingTransform()
             appExtension.registerTransform(transform)
         }
-
-//        if (project.plugins.hasPlugin("com.android.library")) {
-//            LibraryExtension libraryExtension = project.extensions.getByType(LibraryExtension)
-//            Transform transform = new RouterMappingTransform()
-//            libraryExtension.registerTransform(transform)
-//        }
 
         // 注册 RouterExtension
         project.getExtensions().create("router", RouterExtension.class)
